@@ -1,0 +1,867 @@
+2019-09-28 15:30:32 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp/mysql/src/Connection.php' (include_path='.;C:\php\pear') in G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp\Events.php on line 24"
+2019-09-28 15:30:33 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp/mysql/src/Connection.php' (include_path='.;C:\php\pear') in G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp\Events.php on line 24"
+2019-09-28 15:30:34 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp/mysql/src/Connection.php' (include_path='.;C:\php\pear') in G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp\Events.php on line 24"
+2019-09-28 15:30:35 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp/mysql/src/Connection.php' (include_path='.;C:\php\pear') in G:\phpstudy\WWW\let\gatewayWorker\Applications\YourApp\Events.php on line 24"
+2019-09-28 15:30:36 pid:1 Worker process terminated with ERROR: E_COMPILE_ERROR "require_once(): Failed opening required 'G:\phpstudy\WWW\rbac\gatewayWorker\Applications\YourApp/mysql/src/Connection.php' (include_path='.;C:\php\pear') in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\YourApp\Events.php on line 24"
+2019-09-29 11:09:19 pid:1 Worker process terminated with ERROR: E_ERROR "Call to protected method Workerman\MySQL\Connection::build() from context 'Events' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php on line 89"
+2019-09-29 13:20:02 pid:1 Worker process terminated with ERROR: E_ERROR "Call to undefined method Workerman\MySQL\Connection::andWhere() in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php on line 95"
+2019-09-29 13:22:27 pid:1 exception 'PDOException' with message 'SQL:SELECT c.* FROM `car_chat` AS `c` WHERE `c`.`send_user_id` = 1 or `c`.`recv_user_id` = 1  AND `c`.`is_delete` = 0 ORDER BY sort ASC SQLSTATE[42S22]: Column not found: 1054 Unknown column 'c.send_user_id' in 'where clause'' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT c.* FROM...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(95): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"login"...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"login"...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-09-29 13:22:27 pid:1 Worker process terminated
+2019-09-29 13:26:44 pid:1 Worker process terminated with ERROR: E_ERROR "Cannot redeclare get_chat_id() (previously declared in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php:75) in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php on line 75"
+2019-09-29 14:27:26 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-09-29 14:27:26 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-09-29 16:18:14 pid:1 exception 'Exception' with message 'You can't send(array) to client, you need to convert it to a string. ' in G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Protocols\Websocket.php:236
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(344): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(765): Workerman\Connection\TcpConnection->send(Array)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #46)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(276): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\Gateway->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_gateway.php(63): Workerman\Worker::runAll()
+#12 {main}
+2019-09-29 16:18:14 pid:1 Worker process terminated
+2019-09-29 16:20:30 pid:1 exception 'Exception' with message 'You can't send(array) to client, you need to convert it to a string. ' in G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Protocols\Websocket.php:236
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(344): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(765): Workerman\Connection\TcpConnection->send(Array)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #37)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(276): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\Gateway->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_gateway.php(63): Workerman\Worker::runAll()
+#12 {main}
+2019-09-29 16:20:30 pid:1 Worker process terminated
+2019-09-29 16:20:55 pid:1 exception 'Exception' with message 'You can't send(array) to client, you need to convert it to a string. ' in G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Protocols\Websocket.php:236
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(344): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(765): Workerman\Connection\TcpConnection->send(Array)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #37)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(276): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\Gateway->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_gateway.php(63): Workerman\Worker::runAll()
+#12 {main}
+2019-09-29 16:20:55 pid:1 Worker process terminated
+2019-09-29 16:25:30 pid:1 exception 'Exception' with message 'You can't send(array) to client, you need to convert it to a string. ' in G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Protocols\Websocket.php:236
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(344): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(765): Workerman\Connection\TcpConnection->send(Array)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #37)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(276): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\Gateway->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_gateway.php(63): Workerman\Worker::runAll()
+#12 {main}
+2019-09-29 16:25:30 pid:1 Worker process terminated
+2019-10-11 17:07:38 pid:1 exception 'PDOException' with message 'SQL:INSERT INTO `car_chat_friend` ( `user_id`,`firend_id`,`to_user_id`,`date_entered`) VALUES ( :user_id,:firend_id,:to_user_id,:date_entered) SQLSTATE[42S22]: Column not found: 1054 Unknown column 'firend_id' in 'field list'' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('INSERT INTO `ca...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(253): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"add_fr...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"add_fr...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-10-11 17:07:38 pid:1 Worker process terminated
+2019-10-11 17:08:14 pid:1 exception 'PDOException' with message 'SQL:INSERT INTO `car_chat_friend` ( `user_id`,`firend_id`,`to_user_id`,`date_entered`) VALUES ( :user_id,:firend_id,:to_user_id,:date_entered) SQLSTATE[42S22]: Column not found: 1054 Unknown column 'firend_id' in 'field list'' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('INSERT INTO `ca...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(253): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"add_fr...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"add_fr...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-10-11 17:08:14 pid:1 Worker process terminated
+2019-10-12 13:59:55 pid:1 Worker process terminated with ERROR: E_ERROR "Call to undefined method Workerman\MySQL\Connection::andWhere() in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php on line 359"
+2019-10-15 10:58:38 pid:1 exception 'PDOException' with message 'SQL:SELECT user_id,to_user_id FROM `car_chat_friend` WHERE user_id= OR to_user_id= AND status = 1 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OR to_user_id= AND status = 1' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT user_id,...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(359): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-10-15 10:58:38 pid:1 Worker process terminated
+2019-10-15 11:00:28 pid:1 exception 'PDOException' with message 'SQL:SELECT user_id,to_user_id FROM `car_chat_friend` WHERE user_id= OR to_user_id= AND status = 1 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OR to_user_id= AND status = 1' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT user_id,...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(359): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-10-15 11:00:28 pid:1 Worker process terminated
+2019-10-15 11:01:19 pid:1 exception 'PDOException' with message 'SQL:SELECT user_id,to_user_id FROM `car_chat_friend` WHERE user_id= OR to_user_id= AND status = 1 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OR to_user_id= AND status = 1' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT user_id,...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(359): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-10-15 11:01:19 pid:1 Worker process terminated
+2019-10-28 16:48:53 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-10-28 16:48:54 pid:1 Worker process terminated
+2019-10-28 16:48:57 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-10-28 16:48:58 pid:1 Worker process terminated
+2019-10-28 16:49:01 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-10-28 16:49:01 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-10-28 16:49:02 pid:1 Worker process terminated
+2019-10-28 16:49:05 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-10-28 16:49:05 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-10-28 16:49:06 pid:1 Worker process terminated
+2019-10-28 16:49:09 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-10-28 16:49:09 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-10-28 16:49:10 pid:1 Worker process terminated
+2019-10-28 16:49:13 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-10-28 16:49:13 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-10-28 16:49:14 pid:1 Worker process terminated
+2019-10-28 16:49:17 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-10-28 16:49:17 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-10-28 16:49:18 pid:1 Worker process terminated
+2019-10-28 16:49:21 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-10-28 16:49:25 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-17 10:04:41 pid:1 exception 'PDOException' with message 'SQL:SELECT count(*) AS num FROM `car_chat_collection` WHERE user_id = 1 and from_user_id = 2 and msg = '<img src='/static/chat/emotion/68.gif' style='width:20px;height:20px;'>' SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gif' style='width:20px;height:20px;'>'' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1898): Workerman\MySQL\Connection->execute('SELECT count(*)...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(422): Workerman\MySQL\Connection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"collec...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"collec...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-17 10:04:41 pid:1 Worker process terminated
+2019-12-17 10:05:24 pid:1 exception 'PDOException' with message 'SQL:SELECT count(*) AS num FROM `car_chat_collection` WHERE user_id = 1 and from_user_id = 2 and msg = '<img src='/static/chat/emotion/68.gif' style='width:20px;height:20px;'>' SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gif' style='width:20px;height:20px;'>'' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1898): Workerman\MySQL\Connection->execute('SELECT count(*)...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(422): Workerman\MySQL\Connection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"collec...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"collec...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-17 10:05:24 pid:1 Worker process terminated
+2019-12-17 10:07:10 pid:1 exception 'PDOException' with message 'SQL:SELECT count(*) AS num FROM `car_chat_collection` WHERE user_id = 1 and from_user_id = 2 and msg = \'<img src='/static/chat/emotion/68.gif' style='width:20px;height:20px;'>\' SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\'<img src='/static/chat/emotion/68.gif' style='width:20px;height:20px;'>\'' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1898): Workerman\MySQL\Connection->execute('SELECT count(*)...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(422): Workerman\MySQL\Connection->row()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"collec...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"collec...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-17 10:07:10 pid:1 Worker process terminated
+2019-12-17 15:18:10 pid:1 exception 'Exception' with message 'You can't send(array) to client, you need to convert it to a string. ' in G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Protocols\Websocket.php:236
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(344): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(765): Workerman\Connection\TcpConnection->send(Array)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #96)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(276): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\Gateway->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_gateway.php(63): Workerman\Worker::runAll()
+#12 {main}
+2019-12-17 15:18:10 pid:1 Worker process terminated
+2019-12-17 15:18:31 pid:1 exception 'Exception' with message 'You can't send(array) to client, you need to convert it to a string. ' in G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Protocols\Websocket.php:236
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(344): Workerman\Protocols\Websocket::encode(Array, Object(Workerman\Connection\TcpConnection))
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(765): Workerman\Connection\TcpConnection->send(Array)
+#2 [internal function]: GatewayWorker\Gateway->onWorkerMessage(Object(Workerman\Connection\TcpConnection), Array)
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\TcpConnection), Array)
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #37)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\Gateway.php(276): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\Gateway->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_gateway.php(63): Workerman\Worker::runAll()
+#12 {main}
+2019-12-17 15:18:31 pid:1 Worker process terminated
+2019-12-17 16:52:47 pid:1 exception 'PDOException' with message 'SQL:UPDATE `car_chat_friend` SET `is_deleted` = :is_deleted WHERE user_id=1 and to_user_id=undefined OR to_user_id=1 and user_id=undefined SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('UPDATE `car_cha...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(425): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"delete...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"delete...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-17 16:52:47 pid:1 Worker process terminated
+2019-12-17 16:57:44 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(407): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-17 16:57:44 pid:1 Worker process terminated
+2019-12-17 16:57:47 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(407): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-17 16:57:47 pid:1 Worker process terminated
+2019-12-17 16:57:51 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(407): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-17 16:57:51 pid:1 Worker process terminated
+2019-12-18 11:06:27 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-18 11:06:27 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-18 11:50:13 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_chat_msg` WHERE id=undefined SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1898): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(536): Workerman\MySQL\Connection->row()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(472): Events::getMessageById('undefined')
+#3 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"send_m...')
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"send_m...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#14 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#15 {main}
+2019-12-18 11:50:13 pid:1 Worker process terminated
+2019-12-18 11:51:18 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_chat_msg` WHERE id=undefined SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1898): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(536): Workerman\MySQL\Connection->row()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(472): Events::getMessageById('undefined')
+#3 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"send_m...')
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"send_m...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#14 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#15 {main}
+2019-12-18 11:51:18 pid:1 Worker process terminated
+2019-12-18 12:56:47 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_chat_msg` WHERE id=undefined SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1898): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(536): Workerman\MySQL\Connection->row()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(472): Events::getMessageById('undefined')
+#3 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"send_m...')
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"send_m...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#14 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#15 {main}
+2019-12-18 12:56:47 pid:1 Worker process terminated
+2019-12-23 13:46:48 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1751): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT c.*,`t`....', Array)
+#3 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(502): Workerman\MySQL\Connection->query()
+#4 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"collec...')
+#5 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"collec...')
+#6 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#8 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#12 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#13 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#14 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#15 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#16 {main}
+2019-12-23 13:46:48 pid:1 Worker process terminated
+2019-12-23 13:46:52 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:52 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:53 pid:1 Worker process terminated
+2019-12-23 13:46:53 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:53 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:54 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:54 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:55 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:46:56 pid:1 Worker process terminated
+2019-12-23 13:46:56 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:56 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:46:59 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:46:59 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:00 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:00 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:00 pid:1 Worker process terminated
+2019-12-23 13:47:02 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:02 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:03 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:03 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:47:04 pid:1 Worker process terminated
+2019-12-23 13:47:05 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:05 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:07 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:07 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:47:08 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:08 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:08 pid:1 Worker process terminated
+2019-12-23 13:47:10 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:10 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:11 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:11 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:47:12 pid:1 Worker process terminated
+2019-12-23 13:47:13 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:13 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:15 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:15 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:47:16 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:16 pid:1 SendBufferToWorker fail. The connections between Gateway and BusinessWorker are not ready. See http://doc2.workerman.net/send-buffer-to-worker-fail.html
+2019-12-23 13:47:16 pid:1 Worker process terminated
+2019-12-23 13:47:19 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:19 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:47:20 pid:1 Worker process terminated
+2019-12-23 13:47:23 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:23 pid:1 exception 'PDOException' with message 'SQLSTATE[HY000] [2002] ����Ŀ�����������ܾ����޷����ӡ�
+' in G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1712
+Stack trace:
+#0 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1712): PDO->__construct('mysql:dbname=ca...', 'root', 'root', Array)
+#1 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1698): Workerman\MySQL\Connection->connect()
+#2 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\Events.php(45): Workerman\MySQL\Connection->__construct('localhost', '3306', 'root', 'root', 'car')
+#3 [internal function]: Events::onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#4 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(223): call_user_func('Events::onWorke...', Object(GatewayWorker\BusinessWorker))
+#5 [internal function]: GatewayWorker\BusinessWorker->onWorkerStart(Object(GatewayWorker\BusinessWorker))
+#6 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(2367): call_user_func(Array, Object(GatewayWorker\BusinessWorker))
+#7 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#8 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#9 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#10 G:\phpstudy\WWW\rbac\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#11 G:\phpstudy\WWW\rbac\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#12 {main}
+2019-12-23 13:47:24 pid:1 Worker process terminated
+2019-12-23 13:47:27 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-23 13:47:31 pid:1 Register auth timeout (127.0.0.1). See http://doc2.workerman.net/register-auth-timeout.html
+2019-12-31 10:42:38 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(411): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-31 10:42:38 pid:1 Worker process terminated
+2019-12-31 10:43:37 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(411): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-31 10:43:37 pid:1 Worker process terminated
+2019-12-31 10:46:19 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(411): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-31 10:46:19 pid:1 Worker process terminated
+2019-12-31 10:52:39 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(411): Workerman\MySQL\Connection->query()
+#2 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#3 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#4 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#5 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#7 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#8 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#9 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#10 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#11 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#12 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#13 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#14 {main}
+2019-12-31 10:52:39 pid:1 Worker process terminated
+2019-12-31 11:00:04 pid:1 exception 'PDOException' with message 'SQL:SELECT user_id,to_user_id FROM `car_chat_friend` WHERE (user_id= or to_user_id=) and status = 1 and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'or to_user_id=) and status = 1 and is_deleted = 0' at line 1' in G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT user_id,...', Array)
+#1 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(143): Workerman\MySQL\Connection->query()
+#2 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(433): Events::getFriendListByUid()
+#3 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#4 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#8 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#9 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#10 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#11 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#12 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#13 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#14 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#15 {main}
+2019-12-31 11:00:04 pid:1 Worker process terminated
+2019-12-31 11:10:53 pid:1 exception 'PDOException' with message 'SQL:SELECT * FROM `car_customer` WHERE id in() and is_deleted = 0 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') and is_deleted = 0' at line 1' in G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php:1770
+Stack trace:
+#0 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\mysql\src\Connection.php(1828): Workerman\MySQL\Connection->execute('SELECT * FROM `...', Array)
+#1 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(154): Workerman\MySQL\Connection->query()
+#2 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\Events.php(445): Events::getFriendListByUid('5')
+#3 [internal function]: Events::onMessage('7f0000010b54000...', '{"type":"friend...')
+#4 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(403): call_user_func('Events::onMessa...', '7f0000010b54000...', '{"type":"friend...')
+#5 [internal function]: GatewayWorker\BusinessWorker->onGatewayMessage(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#6 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Connection\TcpConnection.php(658): call_user_func(Array, Object(Workerman\Connection\AsyncTcpConnection), Array)
+#7 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #33)
+#8 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#9 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(2382): Workerman\Events\Select->loop()
+#10 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\gateway-worker\src\BusinessWorker.php(197): Workerman\Worker->run()
+#11 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1353): GatewayWorker\BusinessWorker->run()
+#12 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(1296): Workerman\Worker::forkWorkersForWindows()
+#13 G:\phpstudy\WWW\system\gatewayWorker\vendor\workerman\workerman\Worker.php(509): Workerman\Worker::forkWorkers()
+#14 G:\phpstudy\WWW\system\gatewayWorker\Applications\Chat\start_businessworker.php(35): Workerman\Worker::runAll()
+#15 {main}
+2019-12-31 11:10:53 pid:1 Worker process terminated
