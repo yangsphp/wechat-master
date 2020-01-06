@@ -534,3 +534,5 @@ $config['customer'] = "customer";
 $config['chat'] = "chat";
 $config['chat_friend'] = "chat_friend";
 $config['chat_msg'] = "chat_msg";
+$config['chat_msg_receive'] = "chat_msg_receive";
+

@@ -18,11 +18,6 @@ class Chat extends CI_Controller
         $this->load->model('customer_model');
     }
 
-    public function upload()
-    {
-        var_dump($_REQUEST);
-    }
-
     public function index()
     {
         $user = $this->session->userdata("chat_user");
@@ -67,6 +62,13 @@ class Chat extends CI_Controller
         $this->load->view('chat/newfriend', $data);
     }
 
+    public function getSearchFriend()
+    {
+        $val = $this->input->get("val");
+        $friend = $this->chat_model->getSearchFriend($val);
+        echo json_encode($friend);
+    }
+
     public function sendMsgToFriend(){
         $msg_id = $this->input->get("msg_id");
         $csrf = array(
@@ -80,6 +82,32 @@ class Chat extends CI_Controller
         $data['msg_id'] = $msg_id;
         $data['uid'] = $user['id'];
         $this->load->view('chat/sendMsgToFriend', $data);
+    }
+
+    public function getMessageList()
+    {
+        $chat_id = $this->input->get("chat_id");
+        $name = $this->input->get("name");
+        $csrf = array(
+            'name' => $this->security->get_csrf_token_name(),
+            'hash' => $this->security->get_csrf_hash()
+        );
+        $data['csrf'] = $csrf;
+        $user = $this->session->userdata("chat_user");
+        $chat_msg = $this->chat_model->getMsgHistory($user['id'], $chat_id, 0, 100);
+        $data['chat_msg'] = $chat_msg;
+        $data['name'] = $name;
+        $data['chat_id'] = $chat_id;
+        $this->load->view('chat/getMessageList', $data);
+    }
+
+    public function getSearchMsg()
+    {
+        $chat_id = $this->input->get("chat_id");
+        $page = $this->input->get("page");
+        $user = $this->session->userdata("chat_user");
+        $data = $this->chat_model->getMsgHistory($user['id'], $chat_id, 0, 100);
+        echo json_encode($data);
     }
 
     public function login()

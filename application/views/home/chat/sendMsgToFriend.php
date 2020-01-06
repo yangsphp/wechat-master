@@ -118,7 +118,7 @@
         background: #1AAD19;
     }
 </style>
-<div class="am-modal-dialog" style="width: 350px;background: #F3F3F3">
+<div class="am-modal-dialog" style="width: 400px;background: #F3F3F3">
     <div class="am-modal-hd">转发消息
         <a href="javascript: void(0)" class="am-close" data-am-modal-close>&times;</a>
     </div>
@@ -172,7 +172,7 @@
             }
 
         }
-        var msg_data = '{"type":"send_msg_to_friends", "msg_id": "<?php echo $msg_id?>","uid": "<?php echo $uid?>", "to_user_id": "'+to_user_id+'", "sign":"friend"}';
+        var msg_data = '{"type":"send_msg_to_friends", "msg_id": "<?php echo $msg_id?>","to_user_id": "'+to_user_id+'", "sign":"0"}';
         ws.send(msg_data);
         $("#modal-box").modal('close');
     }

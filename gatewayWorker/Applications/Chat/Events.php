@@ -24,6 +24,8 @@ use \GatewayWorker\Lib\Gateway;
 
 require_once __DIR__ . "/mysql/src/Connection.php";
 
+define("ROOT", dirname(dirname(dirname(dirname(__FILE__)))));
+
 /**
  * 主逻辑
  * 主要是处理 onConnect onMessage onClose 三个方法
@@ -36,6 +38,10 @@ class Events
      */
     public static $db = null;
     public static $_pre = "car_";
+    public static $_fileType = array('png', 'jpg', 'jpeg', 'gif');
+    //消息类型：0：文本，1：图片，2：文件
+    public static $_msgType = array(0, 1, 2);
+    public static $_imgUploadPath = "/upload/chat/images";
 
     /**
      * 进程启动后初始化数据库连接
@@ -169,7 +175,10 @@ class Events
      */
     public static function getSendFriendNum($uid)
     {
-        return self::$db->select("count(*) as num")->from(self::$_pre . "chat_friend")->where("status = 0 and is_deleted = 0 and to_user_id = {$uid}")->row();
+        return self::$db->select("count(*) as num")
+            ->from(self::$_pre . "chat_friend")
+            ->where("status = 0 and is_deleted = 0 and to_user_id = {$uid}")
+            ->row();
     }
 
     /**
@@ -181,79 +190,335 @@ class Events
     public static function getMessageListByChatId($uid, $chat_id)
     {
         $message_list = self::$db->select("m.*, c.truename, c.head_img")
-            ->from(self::$_pre . "chat_msg as m")
-            ->leftJoin(self::$_pre . "customer as c", "c.id=m.user_id")
-            ->where("m.chat_id='{$chat_id}' and LOCATE({$uid}, deleted)=0")
-            ->orderByASC(array("m.id"))
+            ->from(self::$_pre . "chat_msg_receive as r")
+            ->leftJoin(self::$_pre . "chat_msg as m", "m.id = r.msg_id")
+            ->leftJoin(self::$_pre . "customer as c", "c.id = m.send_user_id")
+            ->where("m.chat_id = '$chat_id' and r.is_deleted = 0 and r.to_user_id = $uid")
             ->query();
-        foreach ($message_list as $i => $j) {
-            if ($j['user_id'] == $uid) {
-                $message_list[$i]["is_me"] = 1;
+        foreach ($message_list as $k => $v) {
+            if ($v['send_user_id'] == $uid) {
+                $message_list[$k]["is_me"] = 1;
             } else {
-                if ($j['is_read'] == 0) {
-                    //设置消息已读
-                    self::$db->update(self::$_pre . "chat_msg")->cols(array('is_read' => 1))->where('id=' . $j['id'])->query();
-                }
-                $message_list[$i]["is_me"] = 0;
+                $message_list[$k]["is_me"] = 0;
             }
         }
         return $message_list;
     }
 
     /**
-     * 获取当前用户聊天列表与第一个聊天的聊天历史
+     * 获取群成员信息
+     * @param $group_id
+     * @return mixed
+     */
+    public static function getGroupUserInfo($group_id)
+    {
+        $group_user = self::$db->select("c.*, u.user_id")
+            ->from(self::$_pre . "chat_group_user as u")
+            ->leftJoin(self::$_pre . "customer as c", "c.id = u.user_id")
+            ->where("u.group_id = {$group_id}")
+            ->query();
+        return $group_user;
+    }
+
+    /**
+     * 获取当前用户聊天列表
      * @param $uid
      * @return array
      */
     public static function getUserChatListById($uid)
     {
-        //获取用户交谈的数据
-        $histroy = self::$db->select("c.*, from.truename as from_truename, from.head_img as from_head_img, to.truename as to_truename, to.head_img as to_head_img")
-            ->from(self::$_pre . "chat as c")
-            ->leftJoin(self::$_pre . "customer as to", "to.id=c.to_user_id")
-            ->leftJoin(self::$_pre . "customer as from", "from.id=c.from_user_id")
-            ->where("(c.from_user_id = $uid or c.to_user_id = $uid) and c.is_delete = 0")
-            ->orderByDESC(array("update_entered"))
+        $chat = self::$db->select("*")->from(self::$_pre . "chat as c")
+            ->leftJoin(self::$_pre . "chat_last_msg as l", "c.chat_id = l.chat_id")
+            ->where("c.user_id = $uid and c.is_deleted = 0")
+            ->orderByASC(array("c.is_top"))
             ->query();
-
-        // 通知当前客户端初始化
-        $message_list = array();
-        foreach ($histroy as $k => $v) {
-            $chat_id = self::get_chat_id($v['from_user_id'], $v['to_user_id']);
-            //未读消息数量
-            $histroy[$k]['number'] = 0;
-
-            //获取交谈用户信息
-            if ($v['from_user_id'] != $uid) {
-                $histroy[$k]['uid'] = $v['from_user_id'];
-                $histroy[$k]['truename'] = $v['from_truename'];
-                $histroy[$k]['head_img'] = $v['from_head_img'];
-            } elseif ($v['to_user_id'] != $uid) {
-                $histroy[$k]['uid'] = $v['to_user_id'];
-                $histroy[$k]['truename'] = $v['to_truename'];
-                $histroy[$k]['head_img'] = $v['to_head_img'];
-            }
-            $time = date("y/m/d", strtotime($v['update_entered']));
-            $histroy[$k]["time"] = $time;
-
-            //删除无用数据
-            unset($histroy[$k]['to_truename']);
-            unset($histroy[$k]['to_head_img']);
-            unset($histroy[$k]['from_truename']);
-            unset($histroy[$k]['from_head_img']);
-
-            if ($k == 0) {
-                //获取第一个的聊天内容
-                $message_list = self::getMessageListByChatId($uid, $chat_id);
-                continue;
-            }
-            //计算未读信息
-            $no_read = self::$db->select("count(id) as num")->from(self::$_pre . "chat_msg")->where("chat_id='$chat_id' and user_id != $uid and is_read = 0")->row();
-            if ($no_read['num']) {
-                $histroy[$k]['number'] = $no_read['num'];
+        $chat_list = array();
+        if (count($chat) > 0) {
+            $now_date = date("Y-m-d");
+            foreach ($chat as $k => $v) {
+                if ($v['update_entered']) {
+                    $strtotime = strtotime($v['update_entered']);
+                    if ($now_date == date("Y-m-d", $strtotime)) {
+                        $time = date("H:i", $strtotime);
+                    }else{
+                        $time = date("y/m/d", $strtotime);
+                    }
+                } else {
+                    $time = "";
+                }
+                //计算未读消息数量
+                $no_read_num = self::getNoReadMsgNumber($uid, $v['chat_id']);
+                $chat_list[$k] = array(
+                    "chat_id" => $v['chat_id'],
+                    "uid" => $v['anthor_id'],
+                    "type" => $v['type'],
+                    "last_msg" => $v['last_msg'],
+                    "time" => $time
+                );
+                if ($v['type'] == 0) {
+                    //一对一聊天
+                    $user_info = self::getUserInfoById($v['anthor_id']);
+                    $chat_list[$k]['group_count'] = 0;
+                    $chat_list[$k]['no_read'] = $no_read_num;
+                    $chat_list[$k]['truename'] = $user_info['truename'];
+                    $chat_list[$k]['head_img'] = $user_info['head_img'];
+                } else {
+                    //群聊
+                    //获取群成员信息
+                    $group_user = self::getGroupUserInfo($v['anthor_id']);
+                    //获取群信息
+                    $group_info = self::getGroupInfo($v['anthor_id']);
+                    $truename = "";
+                    $head_img = array();
+                    $count = 0;
+                    foreach ($group_user as $key => $value) {
+                        $truename .= $value['truename'] . "、";
+                        if ($key < 9) {
+                            $head_img[] = $value['head_img'];
+                        }
+                        $count++;
+                    }
+                    if ($group_info['group_name']) {
+                        $truename = $group_info['group_name'];
+                    }
+                    $chat_list[$k]['group_count'] = count($group_user);
+                    $chat_list[$k]['count'] = $count > 4 ? 3 : 2;
+                    $chat_list[$k]['no_read'] = $no_read_num;
+                    $chat_list[$k]['truename'] = trim($truename, "、");
+                    $chat_list[$k]['head_img'] = $head_img;
+                }
             }
         }
-        return array('history' => $histroy, 'message_list' => $message_list);
+        return $chat_list;
+    }
+
+    /**
+     * 计算未读消息
+     * @param $uid
+     * @param $chat_id
+     * @return mixed
+     */
+    public static function getNoReadMsgNumber($uid, $chat_id)
+    {
+        $res = self::$db->select("count(*) as num")
+            ->from(self::$_pre . "chat_msg_receive")
+            ->where("to_user_id = $uid and is_read = 0 and is_deleted = 0 and chat_id = '$chat_id'")
+            ->row();
+        return $res['num'];
+    }
+
+    /**
+     * 设置消息为已读
+     * @param $uid
+     * @param $chat_id
+     * @return bool
+     */
+    public static function setMsgIsRead($uid, $chat_id)
+    {
+        $res = self::$db->update(self::$_pre . "chat_msg_receive")
+            ->cols(array(
+                "is_read" => 1
+            ))->where("chat_id = '$chat_id' and to_user_id = $uid and is_deleted = 0 and is_read = 0")->query();
+        if ($res) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断用户是否在聊天列表中
+     * @param $uid
+     * @param $anthor_id
+     * @return bool
+     */
+    public static function judgeUserInChatList($uid, $chat_id)
+    {
+        $res = self::$db->select("count(*) as num")
+            ->from(self::$_pre . "chat")
+            ->where("chat_id = '{$chat_id}' and user_id = $uid and is_deleted = 0")
+            ->row();
+        if ($res['num'] > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 修改聊天时间和最后聊天记录
+     * @param $chat_id
+     * @param $msg
+     * @param $time
+     * @return mixed
+     */
+    public static function updateChatLastTimeAndMsg($chat_id, $msg, $time)
+    {
+        return self::$db->update(self::$_pre . "chat_last_msg")
+            ->cols(array('update_entered' => $time, "last_msg" => $msg))
+            ->where("chat_id='{$chat_id}'")
+            ->query();
+    }
+
+    /**
+     * 删除聊天信息
+     * @param $uid
+     * @param $msg_id
+     * @return mixed
+     */
+    public static function deleteChatMsg($uid, $msg_id)
+    {
+        return self::$db->update(self::$_pre . "chat_msg_receive")
+            ->cols(array("is_deleted" => 1))
+            ->where("msg_id = $msg_id and to_user_id = $uid")
+            ->query();
+    }
+
+    /**
+     * 删除聊天
+     * @param $uid
+     * @param $chat_id
+     * @return mixed
+     */
+    public static function deleteChat($uid, $chat_id)
+    {
+        return self::$db->update(self::$_pre . "chat")
+            ->cols(array("is_deleted" => 1))
+            ->where("chat_id='$chat_id' and user_id = $uid")
+            ->query();
+    }
+
+    /**
+     * 插入聊天
+     * @param int $group_id
+     * @return mixed
+     */
+    public static function insertChat($uid, $chat_id, $anthor_id, $group_id = 0)
+    {
+        $date = date("Y-m-d H:i:s", time());
+        $data = array(
+            "chat_id" => $chat_id,
+            "user_id" => $uid,
+            "date_entered" => $date
+        );
+        if ($group_id) {
+            $data['anthor_id'] = $group_id;
+            $data['type'] = 1;
+        } else {
+            $data['anthor_id'] = $anthor_id;
+        }
+        return self::$db->insert(self::$_pre . "chat")
+            ->cols($data)
+            ->query();
+    }
+
+    /**
+     * 插入最后聊天信息
+     * @param $chat_id
+     * @return bool
+     */
+    public static function insertLastMsg($chat_id)
+    {
+        //判断是否已经存在
+        $res = self::$db->select("count(*) as num")
+            ->from(self::$_pre . "chat_last_msg")
+            ->where("chat_id='{$chat_id}'")
+            ->row();
+        if ($res['num'] > 0) {
+            return true;
+        }
+        return self::$db->insert(self::$_pre . "chat_last_msg")
+            ->cols(array(
+                "chat_id" => $chat_id,
+                "last_msg" => ""
+            ))
+            ->query();
+    }
+
+    /**
+     * 根据用户id获取用户信息
+     * @param $uid
+     * @return mixed
+     */
+    public static function getUserInfoById($uid)
+    {
+        return self::$db->select("*")
+            ->from(self::$_pre . "customer")
+            ->where("id = $uid")
+            ->row();
+    }
+
+    /**
+     * 获取群聊信息
+     * @param $group_id
+     * @return mixed
+     */
+    public static function getGroupInfo($group_id)
+    {
+        return self::$db->select("*")
+            ->from(self::$_pre . "chat_group")
+            ->where("id = $group_id")
+            ->row();
+    }
+
+    /**
+     * 判断是否已经收藏
+     * @param $uid
+     * @param $from
+     * @param $msg
+     * @return mixed
+     */
+    public static function judgeMsgInCollection($uid, $msg_id)
+    {
+        $res = self::$db->select("count(*) as num")
+            ->from(self::$_pre . "chat_collection")
+            ->where("user_id = $uid and msg_id = $msg_id")
+            ->row();
+        return $res['num'];
+    }
+
+    /**
+     * 判断消息类型
+     * @param $msg_type
+     * @return int
+     */
+    public static function judgeMsgType($msg_type)
+    {
+        if (isset($msg_type) && $msg_type)
+        {
+            if (in_array($msg_type, self::$_fileType)) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 上传图片到服务器
+     * @param $base64_image_content
+     * @param $path
+     * @return bool|string
+     */
+    public static function base64_image_content($base64_image_content,$path){
+        //匹配出图片的格式
+        if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)){
+            $type = $result[2];
+            $new_file = $path."/".date('Ymd',time())."/";
+            $basePutUrl = $new_file;
+            $file_name = "img_".time().rand(1000, 9999).".{$type}";
+            $local_file_url = ROOT.$basePutUrl.$file_name;
+            if(!file_exists($basePutUrl)){
+                //检查是否有该文件夹，如果没有就创建，并给予最高权限
+                mkdir($basePutUrl, 0700, true);
+            }
+            if (file_put_contents($local_file_url, base64_decode(str_replace($result[1], '', $base64_image_content)))){
+                return $new_file.$file_name;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -285,13 +550,22 @@ class Events
                 //与uid绑定
                 Gateway::bindUid($client_id, $uid);
                 //获取当前用户聊天列表
-                $data = self::getUserChatListById($uid);
+                $chat_list = self::getUserChatListById($uid);
                 //获取添加好友通知数量
                 $add_friend_num = self::getSendFriendNum($uid);
+
+                $message_list = array();
+                if ($chat_list) {
+                    //获取第一个聊天列表的交谈历史记录
+                    $message_list = self::getMessageListByChatId($uid, $chat_list[0]['chat_id']);
+                    //设置第一个聊天列表的交谈历史记录为已读
+                    self::setMsgIsRead($uid, $chat_list[0]['chat_id']);
+                }
+
                 $response = array(
                     "type" => "init",
-                    "user_list" => $data['history'],
-                    "message_list" => $data['message_list'],
+                    "user_list" => $chat_list,
+                    "message_list" => $message_list,
                     "friend_num" => $add_friend_num['num']
                 );
                 Gateway::sendToClient($client_id, json_encode($response));
@@ -300,135 +574,136 @@ class Events
                 //聊天
                 $uid = $_SESSION['uid'];
                 $time = date("Y-m-d H:i:s");
-                switch ($message_data["sign"]) {
-                    case 'friend':
-                        $chat_id = self::get_chat_id($uid, $message_data["to_user_id"]);
+                $chat_id = $message_data['chat_id'];
+                $anthor_id = $message_data['anthor_id'];
+                $sign = $message_data["sign"];
+                $source_msg = trim($message_data['msg']);
+                $msg_type = self::judgeMsgType($message_data['file_type']);
+                if ($msg_type == 0)
+                {
+                    $left_msg =  trim($message_data['msg']);
+                }elseif ($msg_type == 1)
+                {
+                    $left_msg = "[图片]";
+                    //上传图片
+                    preg_match("/(data:[^']+)'/i",$source_msg,$match);
+                    $upload_url = self::base64_image_content($match[1], self::$_imgUploadPath);
+                    $source_msg = preg_replace("/(data:[^\']+)/i",$upload_url,$source_msg);
+                    var_dump($source_msg);
+                }elseif ($msg_type == 2)
+                {
+                    $left_msg = "[文件]";
+                }
+                //插入的聊天数据
+                $msg_data = array(
+                    'chat_id' => $chat_id,
+                    'msg_type' => $msg_type,
+                    'msg' => $source_msg,
+                    'send_user_id' => $uid,
+                    'date_entered' => $time
+                );
+                switch ($sign) {
+                    case 0:
                         // 判断是否在聊天列表中
-                        $res = self::$db->select("count(*) as num")->from(self::$_pre . "chat")->where("chat_id = '{$chat_id}'")->row();
-                        if ($res['num'] == 0) {
-                            $date = date("Y-m-d H:i:s", time());
-                            self::$db->insert(self::$_pre . "chat")->cols(array(
-                                'chat_id' => $chat_id,
-                                'from_user_id' => $uid,
-                                'to_user_id' => $message_data["to_user_id"],
-                                'date_entered' => $date,
-                                'update_entered' => $date,
-                                'last_msg' => "",
-                            ))->query();
+                        if (!self::judgeUserInChatList($anthor_id, $chat_id)) {
+                            //接收消息用户不在聊天列表中，添加聊天列表
+                            self::insertChat($anthor_id, $chat_id, $uid, 0);
                         }
                         // 插入聊天数据，并发送到客户端
-                        $data = array(
-                            'chat_id' => $chat_id,
-                            'msg' => trim($message_data['msg']),
-                            'user_id' => $uid,
-                            'recv_user_id' => $message_data["to_user_id"],
-                            'date_entered' => $time
-                        );
-                        $id = self::insertMessage($data);
-                        $response = array(
-                            "type" => "chat_msg",
-                            "head_img" => $_SESSION['head_img'],
-                            "msg" => $message_data['msg'],
-                            "send_time" => date("H:i", strtotime($time)),
-                            "uid" => $uid,
-                            "to_user_id" => $message_data["to_user_id"]
-                        );
+                        $user = array($uid, $anthor_id);
+                        //添加聊天信息
+                        $id = self::insertMessage($user, $msg_data);
                         if ($id) {
+                            $response = array(
+                                "type" => "chat_msg",
+                                "head_img" => $_SESSION['head_img'],
+                                "chat_id" => $message_data['chat_id'],
+                                "msg" => $message_data['msg'],
+                                "left_msg" => $left_msg,
+                                'msg_type' => $msg_type,
+                                "msg_id" => $id,
+                                "send_time" => date("H:i", strtotime($time)),
+                                "uid" => $uid,
+                                "to_user_id" => $anthor_id
+                            );
                             $response['status'] = 1;
-                            Gateway::sendToUid($message_data["to_user_id"], json_encode($response));
+                            Gateway::sendToUid($anthor_id, json_encode($response));
+                            Gateway::sendToUid($uid, json_encode($response));
                             //修改聊天时间和最后聊天记录
-                            self::$db->update(self::$_pre . "chat")
-                                ->cols(array('update_entered' => $time, "last_msg" => $message_data['msg'], 'is_delete' => 0))
-                                ->where("chat_id='$chat_id'")
-                                ->query();
+                            self::updateChatLastTimeAndMsg($chat_id, $left_msg, $time);
                         } else {
                             //发送信息失败,告诉发送者
                             $response['status'] = 0;
+                            $response['msg'] = "发送消息失败";
+                            Gateway::sendToUid($uid, json_encode($response));
                         }
-                        Gateway::sendToUid($uid, json_encode($response));
                         break;
-                    case 'group':
-
+                    case 1:
+                        //群聊
+                        //获取所有的群成员信息
+                        $group_user_info = self::getGroupUserInfo($anthor_id);
+                        $user = array();
+                        foreach ($group_user_info as $k => $v) {
+                            // 判断是否在聊天列表中
+                            $user_id = $v['user_id'];
+                            if (!self::judgeUserInChatList($user_id, $chat_id)) {
+                                //接收消息用户不在聊天列表中，添加聊天列表
+                                self::insertChat($user_id, $chat_id, $uid, $anthor_id);
+                            }
+                            $user[] = $user_id;
+                        }
+                        $id = self::insertMessage($user, $msg_data);
+                        if ($id) {
+                            $response = array(
+                                "type" => "chat_msg",
+                                "head_img" => $_SESSION['head_img'],
+                                "chat_id" => $message_data['chat_id'],
+                                "msg" => $message_data['msg'],
+                                'msg_type' => $msg_type,
+                                "left_msg" => $left_msg,
+                                "msg_id" => $id,
+                                "send_time" => date("H:i", strtotime($time)),
+                                "uid" => $uid
+                            );
+                            $response['status'] = 1;
+                            //将消息推送给群成员
+                            //Gateway::sendToUid($user, json_encode($response));
+                            foreach ($group_user_info as $k => $v) {
+                                Gateway::sendToUid($v['user_id'], json_encode($response));
+                            }
+                            //修改聊天时间和最后聊天记录
+                            self::updateChatLastTimeAndMsg($chat_id, $left_msg, $time);
+                        } else {
+                            //发送信息失败,告诉发送者
+                            $response['status'] = 0;
+                            $response['msg'] = "发送消息失败";
+                            Gateway::sendToUid($uid, json_encode($response));
+                        }
                         break;
                 }
                 break;
             case 'chat_msg_list':
                 //获取聊天记录
                 $uid = $_SESSION['uid'];
-                $chat_id = self::get_chat_id($uid, $message_data["to_user_id"]);
-                switch ($message_data["sign"]) {
-                    case 'friend':
-                        //获取聊天历史
-                        $message_list = self::getMessageListByChatId($uid, $chat_id);
-                        $response = array(
-                            "type" => "chat_msg_list",
-                            "message_list" => $message_list
-                        );
-                        Gateway::sendToUid($uid, json_encode($response));
-                        break;
-                }
-                break;
-            case 'send_file_msg':
-                $uid = $_SESSION['uid'];
-                $time = date("Y-m-d H:i:s");
-                switch ($message_data["sign"]) {
-                    case 'friend':
-                        $chat_id = self::get_chat_id($uid, $message_data["to_user_id"]);
-                        // 插入聊天数据，并发送到客户端
-                        $data = array(
-                            'chat_id' => $chat_id,
-                            'msg' => trim($message_data['msg']),
-                            'user_id' => $uid,
-                            'recv_user_id' => $message_data["to_user_id"],
-                            'date_entered' => $time
-                        );
-                        $id = self::insertMessage($data);
-                        
-                        if ($id) {
-                            $response = array(
-                                "type" => "chat_msg",
-                                "head_img" => $_SESSION['head_img'],
-                                "msg" => $message_data['msg'],
-                                "send_time" => date("H:i", strtotime($time)),
-                                "uid" => $uid,
-                                "to_user_id" => $message_data["to_user_id"]
-                            );
-                            Gateway::sendToUid($message_data["to_user_id"], json_encode($response));
-                            Gateway::sendToUid($uid, json_encode($response));
-                            //修改聊天时间和最后聊天记录
-                            if (in_array($message_data['file_type'], array('png', 'jpg', 'jpeg', 'gif'))) {
-                                $msg = "[图片]";
-                            }else{
-                                $msg = "[文件]";
-                            }
-                            self::$db->update(self::$_pre . "chat")
-                                ->cols(array('update_entered' => $time, "last_msg" => $msg, 'is_delete' => 0))
-                                ->where("chat_id='$chat_id'")
-                                ->query();
-                        }else{
-                            $response = array(
-                                "type" => "notify",
-                                "status" => 0,
-                                "msg" => '发送信息失败'
-                            );
-                            Gateway::sendToUid($uid, json_encode($response));
-                        }
-                        break;
-                    
-                    default:
-                        # code...
-                        break;
-                }
+                //获取聊天历史
+                $message_list = self::getMessageListByChatId($uid, $message_data['chat_id']);
+                //设置消息为已读
+                self::setMsgIsRead($uid, $message_data['chat_id']);
+                $response = array(
+                    "type" => "chat_msg_list",
+                    "message_list" => $message_list
+                );
+                Gateway::sendToUid($uid, json_encode($response));
                 break;
             case 'delete_chat':
                 //删除聊天
                 $uid = $_SESSION['uid'];
-                $chat_id = self::get_chat_id($uid, $message_data["to_user_id"]);
-                $result = self::$db->update(self::$_pre . "chat")->cols(array("is_delete" => 1))->where("chat_id='$chat_id'")->query();
+                $chat_id = $message_data["chat_id"];
+                $result = self::deleteChat($uid, $chat_id);
                 $response["type"] = "delete_chat";
                 if ($result) {
                     $response["status"] = 1;
-                    $response["to_user_id"] = $message_data["to_user_id"];
+                    $response["chat_id"] = $chat_id;
                     $response['msg'] = "删除聊天成功";
                 } else {
                     $response['status'] = 0;
@@ -439,15 +714,10 @@ class Events
             case 'delete_chat_msg':
                 //删除聊天信息
                 $uid = $_SESSION['uid'];
-                $msg = self::$db->select("deleted")->from(self::$_pre . "chat_msg")->where("id=" . $message_data["msg_id"])->row();
-                if ($msg['deleted']) {
-                    $deleted = $msg['deleted'] . "," . $uid;
-                } else {
-                    $deleted = $uid;
-                }
-                $res = self::$db->update(self::$_pre . "chat_msg")->cols(array('deleted' => $deleted))->where("id=" . $message_data["msg_id"])->query();
+                $msg_id = $message_data['msg_id'];
+                $res = self::deleteChatMsg($uid, $msg_id);
                 $response["type"] = "delete_chat_msg";
-                $response["msg_id"] = $message_data["msg_id"];
+                $response["msg_id"] = $msg_id;
                 if ($res) {
                     $response["status"] = 1;
                     $response['msg'] = "删除聊天信息成功";
@@ -549,18 +819,31 @@ class Events
             case 'collection_chat_msg':
                 //收藏聊天信息
                 $uid = $_SESSION['uid'];
-                $msg = self::getMessageById($message_data["msg_id"]);
-                $collection = self::$db->select("count(*) as num")->from(self::$_pre . "chat_collection")->where("user_id = $uid and from_user_id = {$msg["user_id"]} and msg = \"" . $msg['msg'] . "\"")->row();
+                $msg_id = $message_data["msg_id"];
+                //获取收藏的消息
+                $msg_info = self::getMessageById($msg_id);
+                $from_user_id = $message_data['from_user_id'];
+                $type = $message_data['sign'];
+                if ($type == 0) {
+                    //朋友
+                    $user_info = self::getUserInfoById($msg_info['send_user_id']);
+                    $from = $user_info['truename'];
+                } elseif ($type == 1) {
+                    //群聊
+                    $group_info = self::getGroupInfo($from_user_id);
+                    $from = $group_info['group_name'];
+                }
+                $collection_num = self::judgeMsgInCollection($uid, $msg_id);
                 $response["type"] = "collection_chat_msg";
-                if ($collection['num'] > 0) {
+                if ($collection_num > 0) {
                     $response["status"] = 1;
                     $response['msg'] = "已收藏";
                 } else {
                     $data = array(
                         "user_id" => $uid,
-                        "from_user_id" => $msg["user_id"],
-                        "msg" => $msg['msg'],
-                        "msg_id" => $msg['id'],
+                        "from" => $from,
+                        "msg" => $msg_info['msg'],
+                        "msg_id" => $msg_id,
                         "date_entered" => date("Y-m-d H:i:s", time())
                     );
                     $res = self::$db->insert(self::$_pre . "chat_collection")->cols($data)->query();
@@ -578,37 +861,51 @@ class Events
                 //发送指定消息给其他朋友
                 $uid = $_SESSION['uid'];
                 $head_img = $_SESSION['head_img'];
-                $msg = self::getMessageById($message_data["msg_id"]);
+                $msg_info = self::getMessageById($message_data["msg_id"]);
                 $to_user_id_array = explode(",", $message_data['to_user_id']);
                 $time = date("Y-m-d H:i:s", time());
                 $response['type'] = $message_data['type'];
-                $response['uid'] = $uid;
-                $response['to_user_id'] = $message_data['to_user_id'];
-                $response['msg'] = $msg['msg'];
-                $response['head_img'] = $head_img;
-                $response['send_time'] = date("H:i", strtotime($time));
                 foreach ($to_user_id_array as $id) {
                     $chat_id = self::get_chat_id($uid, $id);
+                    //判断发送者是否已经在列表中
+                    if (!self::judgeUserInChatList($uid, $chat_id)) {
+                        //插入聊天列表
+                        $res = self::insertChat($uid, $chat_id, $id);
+                        if ($res) {
+                            self::insertLastMsg($chat_id);
+                        }
+                    }
+                    //判断接收者是否在聊天列表中
+                    if (!self::judgeUserInChatList($id, $chat_id)) {
+                        //插入聊天列表
+                        $res = self::insertChat($id, $chat_id, $uid);
+                        if ($res) {
+                            self::insertLastMsg($chat_id);
+                        }
+                    }
                     // 插入聊天数据，并发送到客户端
-                    $data = array(
+                    $msg_data = array(
                         'chat_id' => $chat_id,
-                        'msg' => $msg['msg'],
-                        'user_id' => $uid,
-                        'recv_user_id' => $id,
+                        'msg' => trim($msg_info['msg']),
+                        'send_user_id' => $uid,
                         'date_entered' => $time
                     );
-                    $msg_id = self::insertMessage($data);
+                    $msg_id = self::insertMessage(array($uid, $id), $msg_data);
                     if ($msg_id) {
-                        $response['msg_id'] = $msg_id;
+                        //修改聊天时间和最后聊天记录
+                        self::updateChatLastTimeAndMsg($chat_id, $msg_info['msg'], $time);
                         Gateway::sendToUid($id, json_encode($response));
-                        Gateway::sendToUid($uid, json_encode($response));
                     }
                 }
+                Gateway::sendToUid($uid, json_encode($response));
                 break;
             case 'collection_list':
                 //我的收藏列表
                 $uid = $_SESSION['uid'];
-                $collection = self::$db->select("c.*, t.truename")->from(self::$_pre . "chat_collection as c")->leftJoin(self::$_pre . "customer as t", "t.id = c.from_user_id")->where("user_id = $uid")->orderByDesc(array("c.id"))->query();
+                $collection = self::$db->select("c.*")
+                    ->from(self::$_pre . "chat_collection as c")
+                    ->where("user_id = $uid")
+                    ->orderByDesc(array("c.id"))->query();
                 foreach ($collection as $k => $v) {
                     $collection[$k]['date'] = date("y/m/d", strtotime($v['date_entered']));
                 }
@@ -631,6 +928,49 @@ class Events
                 }
                 Gateway::sendToUid($uid, json_encode($response));
                 break;
+            case 'send_msg_to_user':
+                //在通讯录中发送消息给朋友
+                $uid = $_SESSION['uid'];
+                $to_user_id = $message_data['to_user_id'];
+                //获取聊天id
+                $chat_id = self::get_chat_id($uid, $to_user_id);
+                if (!self::judgeUserInChatList($uid, $chat_id)) {
+                    //插入聊天列表
+                    $res = self::insertChat($uid, $chat_id, $to_user_id);
+                    if ($res) {
+                        self::insertLastMsg($chat_id);
+                    }
+                }
+                $chat_list = self::getUserChatListById($uid);
+                $response = array(
+                    "type" => $message_data['type'],
+                    "user_list" => $chat_list,
+                    "to_user_id" => $to_user_id,
+                    "msg" => "创建聊天成功"
+                );
+                Gateway::sendToUid($uid, json_encode($response));
+                break;
+            case 'update_chat_list':
+                //更新聊天列表
+                $uid = $message_data['user_id'];
+                $active_chat_id = $message_data['active_chat_id'];
+                $chat_list = self::getUserChatListById($uid);
+                //如果聊天列表不存在，则默认显示第一个
+                if (!$active_chat_id) {
+                    $active_chat_id = $chat_list[0]['chat_id'];
+                }
+                //获取第一个聊天列表的交谈历史记录
+                $message_list = self::getMessageListByChatId($uid, $active_chat_id);
+                //设置第一个聊天列表的交谈历史记录为已读
+                self::setMsgIsRead($uid, $active_chat_id);
+                $response = array(
+                    "type" => "update_chat_list",
+                    "user_list" => $chat_list,
+                    "message_list" => $message_list,
+                    "active_chat_id" => $active_chat_id
+                );
+                Gateway::sendToUid($uid, json_encode($response));
+                break;
         }
     }
 
@@ -641,7 +981,7 @@ class Events
      */
     public static function getMessageById($msg_id)
     {
-        return self::$db->select("*")->from(self::$_pre . "chat_msg")->where("id={$msg_id}")->row();
+        return self::$db->select("*")->from(self::$_pre . "chat_msg")->where("id=$msg_id")->row();
     }
 
     /**
@@ -649,9 +989,26 @@ class Events
      * @param $data 插入字段数组
      * @return mixed
      */
-    public static function insertMessage($data)
+    public static function insertMessage($user, $data)
     {
-        return self::$db->insert(self::$_pre . "chat_msg")->cols($data)->query();
+        $uid = $_SESSION['uid'];
+        $msg_id = self::$db->insert(self::$_pre . "chat_msg")->cols($data)->query();
+        $chat_msg_receive = array(
+            "chat_id" => $data['chat_id'],
+            "msg_id" => $msg_id,
+            "date_entered" => $data['date_entered']
+        );
+        foreach ($user as $k => $v) {
+            $chat_msg_receive['to_user_id'] = $v;
+            //如果是自己发送的消息，则设置为已读状态
+            if ($uid == $v) {
+                $chat_msg_receive['is_read'] = 1;
+            } else {
+                $chat_msg_receive['is_read'] = 0;
+            }
+            self::$db->insert(self::$_pre . "chat_msg_receive")->cols($chat_msg_receive)->query();
+        }
+        return $msg_id;
     }
 
     /**

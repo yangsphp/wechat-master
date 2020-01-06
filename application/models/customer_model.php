@@ -108,16 +108,12 @@ class Customer_model extends Common_model
      */
     public function getNewFriend($uid)
     {
-        $friend = $this->db->select("f.friend_id, c.truename, c.head_img, c.id, f.status")->from($this->_chat_friend . " as f")->join($this->_customer . " as c", "f.user_id = c.id", "left")->where("f.to_user_id=$uid")->get()->result_array();
-        foreach ($friend as $k => $v) {
-            $chat = $this->db->get_where($this->_chat, "chat_id='{$v['friend_id']}'")->row_array();
-            if ($chat) {
-                $msg = $chat['last_msg'];
-            } else {
-                $msg = "";
-            }
-            $friend[$k]['last_msg'] = $msg;
-        }
+        $friend = $this->db->select("f.friend_id, c.truename, c.head_img, c.id, f.status")
+            ->from($this->_chat_friend . " as f")
+            ->join($this->_customer . " as c", "f.user_id = c.id", "left")
+            ->where("f.to_user_id=$uid")
+            ->get()
+            ->result_array();
         return $friend;
     }
 

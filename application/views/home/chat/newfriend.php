@@ -62,7 +62,7 @@
         background: #129611 !important;
     }
 </style>
-<div class="am-modal-dialog" style="width: 350px;background: #F3F3F3">
+<div class="am-modal-dialog" style="width: 400px;background: #F3F3F3">
     <div class="am-modal-hd">新朋友
         <a href="javascript: void(0)" class="am-close" data-am-modal-close>&times;</a>
     </div>

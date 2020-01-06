@@ -62,20 +62,20 @@
         background: #129611 !important;
     }
 </style>
-<div class="am-modal-dialog" style="width: 350px;background: #F3F3F3">
+<div class="am-modal-dialog" style="width: 400px;background: #F3F3F3">
     <div class="am-modal-hd">添加好友
         <a href="javascript: void(0)" class="am-close" data-am-modal-close>&times;</a>
     </div>
     <div class="am-modal-bd" style="padding: 15px;">
-        <form class="am-form am-form-inline" style="margin-bottom: 15px;">
+        <form class="am-form am-form-inline" style="margin-bottom: 15px;" onsubmit="return false;">
             <div class="col-sm-10" style="display: inline-block;">
-                <input type="text" class="am-form-field" style="font-size: 1.2rem;" placeholder="请输入微信号/会员名">
+                <input type="text" onkeyup="searchUser(this)" class="am-form-field" style="font-size: 1.2rem;" placeholder="请输入微信号/会员名">
             </div>
             <div class="col-sm-2 col-md-pull-10" style="display: inline-block;text-align: right;">
-                <button type="submit" class="am-btn am-btn-xs" style="padding: .5em 1.2em;background: #1AAD19;color: #fff;">搜索</button>
+                <button class="am-btn am-btn-xs" style="padding: .5em 1.2em;background: #1AAD19;color: #fff;">搜索</button>
             </div>
         </form>
-        <ul class="" style="max-height: 400px;overflow-y: auto;overflow-x: hidden;margin: 0;padding: 0;text-align: left;">
+        <ul class="search-user-list" style="max-height: 400px;overflow-y: auto;overflow-x: hidden;margin: 0;padding: 0;text-align: left;">
             <?php foreach ($friend as $k => $v){?>
             <li data-id="<?php echo $v['id']?>" class="user-list">
                 <div class="user-info">
@@ -96,5 +96,26 @@
     function sendToUser(uid) {
         var msg_data = '{"type":"add_friend","to_user_id": "' + uid + '"}';
         ws.send(msg_data);
+    }
+
+
+    function searchUser(obj)
+    {
+        let value = $(obj).val();
+        $.get('<?php echo site_url("home/chat/getSearchFriend")?>?val='+value, function(data){
+            let html = '<li class="user-list">暂无数据</li>';
+            for (var i = 0; i < data.length; i++) {
+                html += `<li data-id="`+data[i].id+`" class="user-list">
+                <div class="user-info">
+                    <img src="`+data[i].head_img+`" alt="">
+                    <div class="user-truename">`+data[i].truename+`</div>
+                </div>
+                <div class="add-user-btn">
+                    <span class="add-user" onclick="sendToUser(`+data[i].id+`)">添加</span>
+                </div>
+            </li>`;
+            };
+            $(".search-user-list").html(html);
+        }, 'json')
     }
 </script>
