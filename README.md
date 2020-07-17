@@ -15,7 +15,7 @@
 
 - 打开gatewayWorker文件夹，点击运行start_for_win.bat
 
-- 联系我（QQ：2575404985或微信：yangyang92428）捐赠获取数据库和GatewayWorker文件
+- 联系我（QQ：2575404985或微信：yangyang92428）捐赠10元获取数据库和GatewayWorker文件
 
 - 访问：http://你的域名/home/chat/index
 
